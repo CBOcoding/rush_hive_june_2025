@@ -1,17 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_wordle.h                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cborrome <cborrome@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 11:29:00 by cborrome          #+#    #+#             */
-/*   Updated: 2025/06/26 17:29:45 by cborrome         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef GET_NEXT_LINE_CUB3D_H
-# define GET_NEXT_LINE_CUB3D_H
+#ifndef GET_NEXT_LINE_WORDLE_H
+# define GET_NEXT_LINE_WORDLE_H
 # include "wordle.h"
 # include <stddef.h>
 # include <unistd.h>

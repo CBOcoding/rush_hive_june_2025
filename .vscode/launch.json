@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug Wordle",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/wordle",
+        "args": ["word_list.txt"],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "miDebuggerPath": "/usr/bin/gdb"
+      }
+    ]
+  }
