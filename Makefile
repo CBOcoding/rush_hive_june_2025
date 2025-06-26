@@ -2,13 +2,18 @@ NAME	= wordle
 
 CC		= cc
 
-CFLAG	= -Wall -Wextra -Werror -g
+CFLAG	= -Wall -Wextra -Werror -g -fsanitize=address
 
 #graphic library here???
 
-HEADERS	= 
+HEADERS	= -I.
 
-SRCS	= main.c \
+SRCS	=	main.c \
+			arena_simple_exit.c \
+			arena_utils_01.c \
+			importing_list.c \
+			file_check.c \
+
 
 OBJS	=$(SRCS:%.c=%.o)
 
@@ -25,7 +30,6 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
-	@rm -rf $(OBJS)
 
 re: fclean all
 
