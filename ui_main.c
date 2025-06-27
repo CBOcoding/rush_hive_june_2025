@@ -1,8 +1,10 @@
 # define RAYGUI_IMPLEMENTATION
 #include "user_interface.h"
+#include "wordle.h"
 
-int ui_main(void)
+int ui_main(t_wordle *wordle)
 {
+	printf("DEBUG %s\n", wordle->data.words_in_matrix[0]);
 	SetTraceLogLevel(LOG_NONE);
 
 	InitWindow(UI_WIDTH, UI_HEIGHT, "Wordle Assistant");
@@ -24,81 +26,7 @@ int ui_main(void)
 	Vector2 scroll = {0, 0};
 	Rectangle view = {0};
 
-	const char *lines[] = {
-		"Line 1: Hello, world!",
-		"Line 2: This is a scrollable box.",
-		"Line 3: You can add as many lines",
-		"Line 4: as you want here.",
-		"Line 5: Just keep going...",
-		"Line 6: And going...",
-		"Line 7: And going...",
-		"Line 8: Almost there...",
-		"Line 9: Done!",
-				"Line 1: Hello, world!",
-		"Line 2: This is a scrollable box.",
-		"Line 3: You can add as many lines",
-		"Line 4: as you want here.",
-		"Line 5: Just keep going...",
-		"Line 6: And going...",
-		"Line 7: And going...",
-		"Line 8: Almost there...",
-		"Line 9: Done!",
-				"Line 1: Hello, world!",
-		"Line 2: This is a scrollable box.",
-		"Line 3: You can add as many lines",
-		"Line 4: as you want here.",
-		"Line 5: Just keep going...",
-		"Line 6: And going...",
-		"Line 7: And going...",
-		"Line 8: Almost there...",
-		"Line 9: Done!",
-				"Line 1: Hello, world!",
-		"Line 2: This is a scrollable box.",
-		"Line 3: You can add as many lines",
-		"Line 4: as you want here.",
-		"Line 5: Just keep going...",
-		"Line 6: And going...",
-		"Line 7: And going...",
-		"Line 8: Almost there...",
-		"Line 9: Done!",
-				"Line 1: Hello, world!",
-		"Line 2: This is a scrollable box.",
-		"Line 3: You can add as many lines",
-		"Line 4: as you want here.",
-		"Line 5: Just keep going...",
-		"Line 6: And going...",
-		"Line 7: And going...",
-		"Line 8: Almost there...",
-		"Line 9: Done!",
-				"Line 1: Hello, world!",
-		"Line 2: This is a scrollable box.",
-		"Line 3: You can add as many lines",
-		"Line 4: as you want here.",
-		"Line 5: Just keep going...",
-		"Line 6: And going...",
-		"Line 7: And going...",
-		"Line 8: Almost there...",
-		"Line 9: Done!",
-				"Line 1: Hello, world!",
-		"Line 2: This is a scrollable box.",
-		"Line 3: You can add as many lines",
-		"Line 4: as you want here.",
-		"Line 5: Just keep going...",
-		"Line 6: And going...",
-		"Line 7: And going...",
-		"Line 8: Almost there...",
-		"Line 9: Done!",
-				"Line 1: Hello, world!",
-		"Line 2: This is a scrollable box.",
-		"Line 3: You can add as many lines",
-		"Line 4: as you want here.",
-		"Line 5: Just keep going...",
-		"Line 6: And going...",
-		"Line 7: And going...",
-		"Line 8: Almost there...",
-		"Line 9: Done!",
-	};
-	int line_count = sizeof(lines) / sizeof(lines[0]);
+	int line_count = 10;
 
 	while (!WindowShouldClose())
 	{
@@ -127,7 +55,8 @@ int ui_main(void)
 		// Positions the dictionary withtin the boundaries of the scrollable panel
 		BeginScissorMode(view.x, view.y, view.width, view.height);
 		for (int i = 0; i < line_count; i++)
-			DrawTextEx(custom_font, lines[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
+			// DrawTextEx(custom_font, lines[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
+			DrawTextEx(custom_font, wordle->data.words_in_matrix[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
 				30, 5, BLACK);
 		EndScissorMode();
 
