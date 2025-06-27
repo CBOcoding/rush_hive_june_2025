@@ -1,49 +1,32 @@
-CC = cc
-CFLAGS = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
-TARGET = assistant
+NAME    = wordle
 
-HDR = user_interface.h
-SRCS = $(wildcard *.c)
+CC      = cc
 
-all: $(TARGET) $(HDR)
-	@./$(TARGET)
+CFLAGS  = -Wall -Wextra -Werror -g -fsanitize=address
+LFLAGS  = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+HEADERS = -I.
 
-$(TARGET): $(SRCS) $(HDR)
-	@$(CC) $(SRCS) -o $(TARGET) $(CFLAGS)
+SRCS    =   main.c \
+            arena_simple_exit.c \
+            arena_utils_01.c \
+            importing_list.c \
+            ./gnl_wordle/get_next_line_wordle.c \
+            ./gnl_wordle/get_next_line_utils_wordle.c \
+            utils_functions_01.c \
+            file_check.c \
+            ui_main.c \
+            ui_process_input.c \
+            ui_style.c
 
-clean:
-	@rm -f $(TARGET)
-
-re: clean all
-
-.PHONY: all clean re run
-NAME	= wordle
-
-CC		= cc
-
-CFLAG	= -Wall -Wextra -Werror -g -fsanitize=address
-
-HEADERS	= -I.
-
-SRCS	=	main.c \
-			arena_simple_exit.c \
-			arena_utils_01.c \
-			importing_list.c \
-			./gnl_wordle/get_next_line_wordle.c \
-			./gnl_wordle/get_next_line_utils_wordle.c \
-			utils_functions_01.c \
-			file_check.c \
-
-
-OBJS	=$(SRCS:%.c=%.o)
+OBJS    = $(SRCS:%.c=%.o)
 
 all: $(NAME)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(HEADERS)
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) -o $(NAME) $(LFLAGS) $(HEADERS)
 
 clean:
 	@rm -rf $(OBJS)
