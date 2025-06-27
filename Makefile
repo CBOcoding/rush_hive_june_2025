@@ -2,7 +2,7 @@ NAME    = wordle
 
 CC      = cc
 
-CFLAGS  = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS  = -Wall -Wextra -Werror
 LFLAGS  = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 HEADERS = -I.
 
@@ -16,7 +16,8 @@ SRCS    =   main.c \
             file_check.c \
             ui_main.c \
             ui_process_input.c \
-            ui_style.c
+            ui_style.c \
+			assistant_logic.c
 
 OBJS    = $(SRCS:%.c=%.o)
 

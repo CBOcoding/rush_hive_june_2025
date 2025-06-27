@@ -1,5 +1,8 @@
 #include "wordle.h"
 #include "arena.h"
+#include "user_interface.h"
+
+void ui_main(void);
 
 static void	argc_check(int argc)
 {
@@ -39,5 +42,6 @@ int	main(int argc, char **argv)
 	importing_list(argv[1], &wordle);
 
 	arena_destroy(wordle.arena);
+	ui_main();
 	return (SUCCESS);
 }

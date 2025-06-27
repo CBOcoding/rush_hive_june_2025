@@ -126,8 +126,8 @@ void	ui_style_panel(void);
  */
 void	ui_style_textbox(void);
 
-/**
- * 
+/** Temp
+ * @param to be added
  */
 void	temporary_function(Input *letter);
 
