@@ -4,7 +4,6 @@
 
 int ui_main(t_wordle *wordle)
 {
-	printf("DEBUG %s\n", wordle->data.words_in_matrix[0]);
 	SetTraceLogLevel(LOG_NONE);
 
 	InitWindow(UI_WIDTH, UI_HEIGHT, "Wordle Assistant");
@@ -26,7 +25,7 @@ int ui_main(t_wordle *wordle)
 	Vector2 scroll = {0, 0};
 	Rectangle view = {0};
 
-	int line_count = 10;
+	int line_count = wordle->data.len_matrix;
 
 	while (!WindowShouldClose())
 	{
@@ -36,7 +35,7 @@ int ui_main(t_wordle *wordle)
 		// Draws the button
 		ui_style_button();
 		if (GuiButton((Rectangle){B0_X, B0_Y, B0_W, B0_H}, "Submit"))
-			temporary_function(letter);
+			temporary_function(letter, wordle);
 
 		// Draws the textbox
 		ui_style_textbox();
@@ -52,11 +51,36 @@ int ui_main(t_wordle *wordle)
 		GuiScrollPanel((Rectangle){P0_X, P0_Y, P0_W, P0_H}, "WORD SUGGESTIONS",
 			(Rectangle){C0_X, C0_Y, C0_W, (line_count * 30) + 10}, &scroll, &view);
 
+		// Draws the ADVICED WORD panel ??????
+		// ui_style_button();
+		// if (GuiButton((Rectangle){B0_X, B0_Y, B0_W, B0_H}, wordle->data.adviced_word))
+		// adviced_word(wordle); //at the end of assistant logic BUT goes in SEG FAULT!!!!!
+
+
+
 		// Positions the dictionary withtin the boundaries of the scrollable panel
 		BeginScissorMode(view.x, view.y, view.width, view.height);
-		for (int i = 0; i < line_count; i++)
-			// DrawTextEx(custom_font, lines[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
-			DrawTextEx(custom_font, wordle->data.words_in_matrix[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
+		for (int i = 0; i < wordle->data.len_matrix; i++)
+			if (wordle->data.input_guesses_counter == 0)
+				DrawTextEx(custom_font, wordle->data.words_in_matrix_0[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
+				30, 5, BLACK);
+			else if (wordle->data.input_guesses_counter == 1)
+				DrawTextEx(custom_font, wordle->data.words_in_matrix_1[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
+				30, 5, BLACK);
+			else if (wordle->data.input_guesses_counter == 2)
+				DrawTextEx(custom_font, wordle->data.words_in_matrix_2[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
+				30, 5, BLACK);
+			else if (wordle->data.input_guesses_counter == 3)
+				DrawTextEx(custom_font, wordle->data.words_in_matrix_3[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
+				30, 5, BLACK);
+			else if (wordle->data.input_guesses_counter == 4)
+				DrawTextEx(custom_font, wordle->data.words_in_matrix_4[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
+				30, 5, BLACK);
+			else if (wordle->data.input_guesses_counter == 5)
+				DrawTextEx(custom_font, wordle->data.words_in_matrix_5[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
+				30, 5, BLACK);
+			else if (wordle->data.input_guesses_counter == 6)
+				DrawTextEx(custom_font, wordle->data.words_in_matrix_6[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
 				30, 5, BLACK);
 		EndScissorMode();
 

@@ -38,9 +38,20 @@ void	filling_line(char *file_name, t_wordle *wordle)
 	close(fd);
 }
 
+void	len_matrix(char **matrix, t_wordle *wordle)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i])
+		i++;
+	wordle->data.len_matrix = i;
+}
+
 void	filling_words_in_matrix(t_wordle *wordle)
 {
-	wordle->data.words_in_matrix = ft_split(wordle->data.full_list_one_line, '\n', wordle);
+	wordle->data.words_in_matrix_0 = ft_split(wordle->data.full_list_one_line, '\n', wordle);
+	len_matrix(wordle->data.words_in_matrix_0, wordle);
 }
 
 void	importing_list(char *argv, t_wordle *wordle)
@@ -51,13 +62,9 @@ void	importing_list(char *argv, t_wordle *wordle)
 	if (fd == -1)
 		simple_exit("Error\nError on opening the map\n", wordle);
 	total_file_len_calculation(fd, wordle, &wordle->data);
-// printf("DEBUG total file len %d\n", wordle->data.total_file_len);//
 	close (fd);
 	wordle->data.full_list_one_line = arena_alloc(wordle->arena,
 			wordle->data.total_file_len + 1);
-// printf("DEBUG line before filling %s\n", wordle->data.full_list_one_line);//	
 	filling_line(argv, wordle);
-// printf("DEBUG line after filling %s\n", wordle->data.full_list_one_line);//	
 	filling_words_in_matrix(wordle);
-// printf("DEBUG one word in matrix %s\n", wordle->data.words_in_matrix[0]);//	
 }
