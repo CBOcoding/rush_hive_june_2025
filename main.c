@@ -2,7 +2,7 @@
 #include "arena.h"
 #include "user_interface.h"
 
-void ui_main(void);
+void ui_main(t_wordle *wordle);
 
 static void	argc_check(int argc)
 {
@@ -41,7 +41,8 @@ int	main(int argc, char **argv)
 	init_structs(&wordle);
 	importing_list(argv[1], &wordle);
 
+	// printf("DEBUG %s\n", wordle.data.words_in_matrix[0]);
+	ui_main(&wordle);
 	arena_destroy(wordle.arena);
-	ui_main();
 	return (SUCCESS);
 }

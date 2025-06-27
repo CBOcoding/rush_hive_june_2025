@@ -14,7 +14,7 @@
 
 typedef struct s_data
 {
-	int		input_guesses_counter;//when the user input 6 guesses end the program
+	//int		input_guesses_counter;//when the user input 6 guesses end the program
 	int		total_file_len;//
 	char	*full_list_one_line;
 	char	**words_in_matrix;

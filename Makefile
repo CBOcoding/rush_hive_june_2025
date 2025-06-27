@@ -2,7 +2,7 @@ NAME    = wordle
 
 CC      = cc
 
-CFLAGS  = -Wall -Wextra -Werror
+CFLAGS  = -Wall -Wextra
 LFLAGS  = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 HEADERS = -I.
 
