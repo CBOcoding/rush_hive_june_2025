@@ -1,6 +1,24 @@
 #include "wordle.h"
 
-static	char	*copy_word(const char *s, int len, t_wordle *wordle)
+static char	*copy_word(const char *s, int len, t_wordle *wordle);
+static int	count_words(char const *s, char c);
+static char	**free_pointers(char **array, int x);
+static char	**filling(char **array, char const *s, char c, t_wordle *wordle);
+
+char	**ft_split(char const *s, char c, t_wordle *wordle)
+{
+	int		word_count;
+	char	**array;
+
+	word_count = count_words(s, c);
+	array = (char **)arena_alloc(wordle->arena,
+			(word_count + 1) * sizeof(char *));
+	if (filling(array, s, c, wordle) == NULL)
+		return (NULL);
+	return (array);
+}
+
+static char	*copy_word(const char *s, int len, t_wordle *wordle)
 {
 	int		x;
 	char	*word;
@@ -16,7 +34,7 @@ static	char	*copy_word(const char *s, int len, t_wordle *wordle)
 	return (word);
 }
 
-static	int	count_words(char const *s, char c)
+static int	count_words(char const *s, char c)
 {
 	int	count;
 
@@ -39,7 +57,7 @@ static	int	count_words(char const *s, char c)
 	return (count);
 }
 
-static	char	**free_pointers(char **array, int x)
+static char	**free_pointers(char **array, int x)
 {
 	while (x > 0)
 		free(array[--x]);
@@ -47,7 +65,7 @@ static	char	**free_pointers(char **array, int x)
 	return (NULL);
 }
 
-static	char	**filling(char **array, char const *s, char c, t_wordle *wordle)
+static char	**filling(char **array, char const *s, char c, t_wordle *wordle)
 {
 	int			len;
 	int			x;
@@ -72,18 +90,5 @@ static	char	**filling(char **array, char const *s, char c, t_wordle *wordle)
 		}
 	}
 	array[x] = NULL;
-	return (array);
-}
-
-char	**ft_split(char const *s, char c, t_wordle *wordle)
-{
-	int		word_count;
-	char	**array;
-
-	word_count = count_words(s, c);
-	array = (char **)arena_alloc(wordle->arena,
-			(word_count + 1) * sizeof(char *));
-	if (filling(array, s, c, wordle) == NULL)
-		return (NULL);
 	return (array);
 }

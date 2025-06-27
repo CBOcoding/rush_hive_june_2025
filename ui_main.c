@@ -2,7 +2,7 @@
 #include "user_interface.h"
 #include "wordle.h"
 
-int ui_main(t_wordle *wordle)
+void	ui_main(t_wordle *wordle)
 {
 	SetTraceLogLevel(LOG_NONE);
 
@@ -35,7 +35,7 @@ int ui_main(t_wordle *wordle)
 		// Draws the button
 		ui_style_button();
 		if (GuiButton((Rectangle){B0_X, B0_Y, B0_W, B0_H}, "Submit"))
-			temporary_function(letter, wordle);
+			process_wordle_feedback(letter, wordle);
 
 		// Draws the textbox
 		ui_style_textbox();
@@ -84,12 +84,7 @@ int ui_main(t_wordle *wordle)
 				30, 5, BLACK);
 		EndScissorMode();
 
-		if (CheckCollisionPointRec(GetMousePosition(), (Rectangle){P0_X, P0_Y, P0_W, P0_H}))
-		{
-			float wheel_move = GetMouseWheelMove();
-			scroll.y += wheel_move * SCROLL_SPEED;
-		}
-
+		ui_detect_scroll(&scroll);
 		ui_detect_color_flags(letter, box_colors, default_colors);
 		ui_separate_letters(input_word, letter, box_colors);
 
@@ -98,5 +93,4 @@ int ui_main(t_wordle *wordle)
 
 	UnloadFont(custom_font);
 	CloseWindow();
-	return 0;
 }

@@ -1,23 +1,6 @@
 #include "wordle.h"
 
-static void	total_file_len_calculation(int fd, t_wordle *wordle, t_data *data)
-{
-	char	*line;
-	int		char_in_line;
-
-	line = get_next_line(fd, wordle);
-	char_in_line = 0;
-	if (line == NULL)
-		simple_exit("Error\nNULL line\n", wordle);
-	while (line != NULL)
-	{
-		char_in_line = ft_strlen_gnl(line);
-		data->total_file_len = data->total_file_len + char_in_line;
-		line = get_next_line(fd, wordle);
-	}
-	if (data->total_file_len == 0)
-		simple_exit("Error\nEmpty file\n", wordle);
-}
+static void	total_file_len_calculation(int fd, t_wordle *wordle, t_data *data);
 
 void	filling_line(char *file_name, t_wordle *wordle)
 {
@@ -67,4 +50,23 @@ void	importing_list(char *argv, t_wordle *wordle)
 			wordle->data.total_file_len + 1);
 	filling_line(argv, wordle);
 	filling_words_in_matrix(wordle);
+}
+
+static void	total_file_len_calculation(int fd, t_wordle *wordle, t_data *data)
+{
+	char	*line;
+	int		char_in_line;
+
+	line = get_next_line(fd, wordle);
+	char_in_line = 0;
+	if (line == NULL)
+		simple_exit("Error\nNULL line\n", wordle);
+	while (line != NULL)
+	{
+		char_in_line = ft_strlen_gnl(line);
+		data->total_file_len = data->total_file_len + char_in_line;
+		line = get_next_line(fd, wordle);
+	}
+	if (data->total_file_len == 0)
+		simple_exit("Error\nEmpty file\n", wordle);
 }

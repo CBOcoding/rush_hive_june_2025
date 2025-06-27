@@ -1,7 +1,7 @@
 #include "user_interface.h"
 #include "wordle.h"
 
-void	temporary_function(Input *letter, t_wordle *wordle)
+void	process_wordle_feedback(Input *letter, t_wordle *wordle)
 {
 	for (int j = 0; j < 5; j++)
 		printf("DEBUG %c , %d\n", letter[j].c, letter[j].flag);

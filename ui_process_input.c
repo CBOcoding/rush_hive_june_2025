@@ -1,5 +1,14 @@
 #include "user_interface.h"
 
+void	ui_detect_scroll(Vector2 *scroll)
+{
+	if (CheckCollisionPointRec(GetMousePosition(), (Rectangle){P0_X, P0_Y, P0_W, P0_H}))
+	{
+		float wheel_move = GetMouseWheelMove();
+		scroll->y += wheel_move * SCROLL_SPEED;
+	}
+}
+
 void	ui_detect_color_flags(Input *letter, BoxColors *box_colors, Color *default_colors)
 {
 	if (CheckCollisionPointRec(GetMousePosition(), (Rectangle){L0_X, L0_Y, L0_W, L0_H}) &&

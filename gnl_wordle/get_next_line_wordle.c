@@ -1,5 +1,5 @@
-#include "wordle.h"
 #include "get_next_line_wordle.h"
+#include "wordle.h"
 
 char	*get_next_line(int fd, t_wordle *wordle)
 {
