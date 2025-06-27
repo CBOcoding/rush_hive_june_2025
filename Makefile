@@ -13,7 +13,6 @@ SRCS    =   main.c \
             ./gnl_wordle/get_next_line_wordle.c \
             ./gnl_wordle/get_next_line_utils_wordle.c \
             utils_functions_01.c \
-            file_check.c \
             ui_main.c \
             ui_process_input.c \
             ui_style.c \

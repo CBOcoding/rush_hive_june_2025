@@ -40,8 +40,6 @@ int	main(int argc, char **argv)
 		return (FAILURE);
 	init_structs(&wordle);
 	importing_list(argv[1], &wordle);
-
-	// printf("DEBUG %s\n", wordle.data.words_in_matrix[0]);
 	ui_main(&wordle);
 	arena_destroy(wordle.arena);
 	return (SUCCESS);

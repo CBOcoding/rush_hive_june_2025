@@ -5,6 +5,7 @@
 // Library Headers
 //----------------------------------------------------------------------------------
 
+#include "wordle.h"
 # include <raygui.h>
 # include <raylib.h>
 # include <stdio.h>
@@ -129,6 +130,9 @@ void	ui_style_textbox(void);
 /** Temp
  * @param to be added
  */
-void	temporary_function(Input *letter);
+void	temporary_function(Input *letter, t_wordle *wordle);
+
+
+char	*adviced_word(t_wordle *wordle);
 
 #endif
