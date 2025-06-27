@@ -99,9 +99,10 @@ typedef struct BoxColors {
 void	ui_detect_color_flags(Input *letter, BoxColors *box_colors, Color *default_colors);
 
 /** Detects a mouse-scroll when over the scrollable panel and increases the scroll speed
- * 
+ * @param scroll Scroll offset
+ * @return None
  */
-void	ui_detect_scroll(void);
+void	ui_detect_scroll(Vector2 *scroll);
 
 /** Separates the letters of a word into individual boxes
  * @param input_word Word inserted by the user

@@ -55,19 +55,14 @@ int ui_main(t_wordle *wordle)
 		// Positions the dictionary withtin the boundaries of the scrollable panel
 		BeginScissorMode(view.x, view.y, view.width, view.height);
 		for (int i = 0; i < line_count; i++)
-			// DrawTextEx(custom_font, lines[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
-			DrawTextEx(custom_font, wordle->data.words_in_matrix[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
-				30, 5, BLACK);
+			DrawTextEx(custom_font, wordle->data.words_in_matrix[i],
+				(Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30}, 30, 5, BLACK);
 		EndScissorMode();
 
-		if (CheckCollisionPointRec(GetMousePosition(), (Rectangle){P0_X, P0_Y, P0_W, P0_H}))
-		{
-			float wheel_move = GetMouseWheelMove();
-			scroll.y += wheel_move * SCROLL_SPEED;
-		}
-
-		ui_detect_color_flags(letter, box_colors, default_colors);
 		ui_separate_letters(input_word, letter, box_colors);
+		
+		ui_detect_scroll(&scroll);
+		ui_detect_color_flags(letter, box_colors, default_colors);
 
 		EndDrawing();
 	}
