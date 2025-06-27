@@ -16,9 +16,9 @@ int ui_main(void)
 	bool edit_mode = false;
 
 	char input_word[6] = "\0";
-	Input letter[5] = {'\0', 0, '\0', 0, '\0', 0, '\0', 0, '\0', 0,};
+	Input letter[5] = {{'\0', 0}, {'\0', 0}, {'\0', 0}, {'\0', 0}, {'\0', 0}};
 
-	BoxColors box_colors[5] = {LIGHTGRAY, 0, LIGHTGRAY, 0, LIGHTGRAY, 0, LIGHTGRAY, 0, LIGHTGRAY, 0};
+	BoxColors box_colors[5] = {{LIGHTGRAY, 0}, {LIGHTGRAY, 0}, {LIGHTGRAY, 0}, {LIGHTGRAY, 0}, {LIGHTGRAY, 0}};
 	Color default_colors[3] = {LIGHTGRAY, YELLOW, GREEN};
 
 	Vector2 scroll = {0, 0};
