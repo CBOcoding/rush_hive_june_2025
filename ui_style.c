@@ -44,3 +44,10 @@ void	ui_style_panel(void)
 	GuiSetStyle(DEFAULT, TEXT_SPACING, 10);
 	GuiSetStyle(DEFAULT, TEXT_ALIGNMENT, TEXT_ALIGN_CENTER);
 }
+
+void	ui_style_suggestion(void)
+{
+	GuiSetStyle(DEFAULT, TEXT_SIZE, 60);
+	GuiSetStyle(DEFAULT, TEXT_SPACING, 10);
+	GuiSetStyle(DEFAULT, TEXT_ALIGNMENT, TEXT_ALIGN_CENTER);
+}

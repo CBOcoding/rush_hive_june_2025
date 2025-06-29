@@ -5,7 +5,8 @@
 // Library Headers
 //----------------------------------------------------------------------------------
 
-#include "wordle.h"
+# include "wordle.h"
+
 # include <raygui.h>
 # include <raylib.h>
 # include <stdio.h>
@@ -19,10 +20,17 @@
 # define UI_WIDTH 1000
 # define UI_HEIGHT 1600
 
-# define B0_X (((SCREEN_WIDTH - UI_WIDTH) / 2) + (UI_WIDTH - B0_W) / 12)
+# define SCROLL_SPEED 40.0f
+
+# define B0_X (SCREEN_WIDTH - UI_WIDTH) + 490
 # define B0_Y (((SCREEN_HEIGHT - UI_HEIGHT) / 2) + (UI_HEIGHT - B0_H) - 50)
 # define B0_W 200
 # define B0_H 80
+
+# define B1_X (SCREEN_WIDTH - UI_WIDTH) + 750
+# define B1_Y (((SCREEN_HEIGHT - UI_HEIGHT) / 2) + (UI_HEIGHT - B0_H) - 50)
+# define B1_W 200
+# define B1_H 80
 
 # define T0_X (SCREEN_WIDTH - UI_WIDTH) + 20
 # define T0_Y (((SCREEN_HEIGHT - UI_HEIGHT) / 2) + (UI_HEIGHT - T0_H) - 180)
@@ -63,7 +71,10 @@
 # define C0_Y 0
 # define C0_W 580
 
-# define SCROLL_SPEED 40.0f
+# define S0_X (SCREEN_WIDTH - UI_WIDTH) + 20
+# define S0_Y (((SCREEN_HEIGHT - UI_HEIGHT) / 2) + (UI_HEIGHT - T0_H) - 50)
+# define S0_W 300
+# define S0_H 80
 
 //----------------------------------------------------------------------------------
 // Type Definitions
@@ -76,20 +87,34 @@
 typedef struct Input {
 	char	c;
 	int		flag;
-} Input;
+} 	Input;
 
 /** Keeps track of the color for each box
  * @param color Color of the box
  * @param pos Position of the box
  */
 typedef struct BoxColors {
-	Color 	color;
+	Color	color;
 	int		pos;
-} BoxColors;
+} 	BoxColors;
 
 //----------------------------------------------------------------------------------
 // Function Prototypes
 //----------------------------------------------------------------------------------
+
+/** Suggests a word to the player
+ * @param wordle Struct holding data for the main text processing logic
+ * @return None
+ */
+char	*adviced_word(t_wordle *wordle);
+
+/** Processes a feedback returned from the wordle game each round
+ * @param letter Struct holding each individual letter with its color flag
+ * @param wordle Struct holding data for the main text processing logic
+ * @param box_colors Colors and flag values of the separated letters
+ * @return None
+ */
+void	process_wordle_feedback(Input *letter, t_wordle *wordle, BoxColors *box_colors);
 
 /** Detects a mouse-click and sets color flags accordingly
  * @param letter Struct holding each individual letter with its color flag
@@ -100,15 +125,16 @@ typedef struct BoxColors {
 void	ui_detect_color_flags(Input *letter, BoxColors *box_colors, Color *default_colors);
 
 /** Detects a mouse-scroll when over the scrollable panel and increases the scroll speed
- * 
+ * @param scroll Scrol offset
+ * @return None
  */
-void	ui_detect_scroll(void);
+void	ui_detect_scroll(Vector2 *scroll);
 
 /** Separates the letters of a word into individual boxes
  * @param input_word Word inserted by the user
  * @param letter Struct holding each individual letter with its color flag
  * @param box_colors Keeps track of the color for each box
- * @return None.
+ * @return None
  */
 void	ui_separate_letters(char *input_word, Input *letter, BoxColors *box_colors);
 
@@ -122,17 +148,14 @@ void	ui_style_button(void);
  */
 void	ui_style_panel(void);
 
+/** Configurates the visuals of a suggested word
+ * @return None
+ */
+void	ui_style_suggestion(void);
+
 /** Configurates the visuals of a textbox
  * @return None
  */
 void	ui_style_textbox(void);
-
-/** Temp
- * @param to be added
- */
-void	temporary_function(Input *letter, t_wordle *wordle);
-
-
-char	*adviced_word(t_wordle *wordle);
 
 #endif

@@ -1,6 +1,5 @@
 aahed
 aalii
-aapas
 aargh
 aarti
 abaca
@@ -25,19 +24,14 @@ abbot
 abcee
 abeam
 abear
-abeat
-abeer
 abele
 abeng
-abers
 abets
 abeys
 abhor
 abide
 abies
 abius
-abjad
-abjud
 abled
 abler
 ables
@@ -113,7 +107,6 @@ acres
 acrid
 acron
 acros
-acryl
 actas
 acted
 actin
@@ -162,7 +155,6 @@ adorn
 adown
 adoze
 adrad
-adraw
 adred
 adret
 adrip
@@ -672,7 +664,6 @@ array
 arret
 arris
 arrow
-arroz
 arsed
 arses
 arsey
@@ -683,7 +674,6 @@ artel
 arter
 artic
 artis
-artly
 artsy
 aruhe
 arums
@@ -702,7 +692,6 @@ ashen
 ashes
 ashet
 aside
-asity
 askar
 asked
 asker
@@ -883,10 +872,8 @@ baccy
 bacha
 bachs
 backs
-backy
 bacne
 bacon
-badam
 baddy
 badge
 badly
@@ -905,7 +892,6 @@ bahts
 bahus
 bahut
 baiks
-baile
 bails
 bairn
 baisa
@@ -1288,7 +1274,6 @@ biped
 bipod
 bippy
 birch
-birdo
 birds
 biris
 birks
@@ -1299,7 +1284,6 @@ birrs
 birse
 birsy
 birth
-birze
 birzz
 bises
 bisks
@@ -2865,7 +2849,6 @@ dairy
 daisy
 daker
 daled
-dalek
 dales
 dalis
 dalle
@@ -3050,7 +3033,6 @@ denis
 dense
 dente
 dents
-deoch
 deoxy
 depot
 depth
@@ -4120,7 +4102,6 @@ ficus
 fides
 fidge
 fidos
-fidus
 fiefs
 field
 fiend
@@ -4511,7 +4492,6 @@ fungi
 fungo
 fungs
 funic
-funis
 funks
 funky
 funny
@@ -4714,7 +4694,6 @@ genic
 genie
 genii
 genin
-genio
 genip
 genny
 genoa
@@ -4901,7 +4880,6 @@ gnome
 gnows
 goads
 goafs
-goaft
 goals
 goary
 goats
@@ -4996,7 +4974,6 @@ gosht
 gosse
 gotch
 goths
-gothy
 gotta
 gouch
 gouge
@@ -5174,8 +5151,6 @@ gumma
 gummi
 gummy
 gumps
-gunas
-gundi
 gundy
 gunge
 gungy
@@ -6495,7 +6470,6 @@ kokra
 kokum
 kolas
 kolos
-kombi
 kombu
 konbu
 kondo
@@ -6543,7 +6517,6 @@ krona
 krone
 kroon
 krubi
-krump
 krunk
 ksars
 kubie
@@ -6639,7 +6612,6 @@ lahal
 lahar
 laich
 laics
-laide
 laids
 laigh
 laika
@@ -7117,7 +7089,6 @@ lovee
 lover
 loves
 lovey
-lovie
 lowan
 lowed
 lowen
@@ -7772,7 +7743,6 @@ mitas
 mitch
 miter
 mites
-mitey
 mitie
 mitis
 mitre
@@ -7847,7 +7817,6 @@ mohos
 mohrs
 mohua
 mohur
-moile
 moils
 moira
 moire
@@ -8556,7 +8525,6 @@ nosey
 noshi
 nosir
 notal
-notam
 notch
 noted
 noter
@@ -8942,7 +8910,6 @@ outed
 outen
 outer
 outgo
-outie
 outre
 outro
 outta
@@ -9153,13 +9120,11 @@ parve
 parvo
 pasag
 pasar
-pasch
 paseo
 pases
 pasha
 pashm
 paska
-pasmo
 paspy
 passe
 passu
@@ -9171,7 +9136,6 @@ patas
 patch
 pated
 patee
-patel
 paten
 pater
 pates
@@ -9309,7 +9273,6 @@ penne
 penni
 penny
 pense
-pensy
 pents
 peola
 peons
@@ -9679,7 +9642,6 @@ pogey
 pogge
 poggy
 pogos
-pogue
 pohed
 poilu
 poind
@@ -9815,7 +9777,6 @@ pouch
 pouff
 poufs
 poufy
-pouis
 pouke
 pouks
 poule
@@ -10221,7 +10182,6 @@ quoll
 quonk
 quops
 quork
-quorl
 quota
 quote
 quoth
@@ -10814,7 +10774,6 @@ roman
 romeo
 romer
 romps
-rompu
 rompy
 ronde
 rondo
@@ -10912,7 +10871,6 @@ rowel
 rowen
 rower
 rowet
-rowie
 rowme
 rownd
 rowns
@@ -11254,7 +11212,6 @@ schmo
 schul
 schwa
 scifi
-scind
 scion
 scire
 sclim
@@ -11378,7 +11335,6 @@ sekts
 selah
 seles
 selfs
-selfy
 selky
 sella
 selle
@@ -11574,7 +11530,6 @@ shoji
 shojo
 shola
 shone
-shonk
 shook
 shool
 shoon
@@ -11607,7 +11562,6 @@ shtar
 shtik
 shtum
 shtup
-shuba
 shuck
 shule
 shuln
@@ -11985,7 +11939,6 @@ snips
 snipy
 snirt
 snits
-snive
 snobs
 snods
 snoek
@@ -13092,7 +13045,6 @@ tides
 tiefs
 tiers
 tiffs
-tifos
 tifts
 tiger
 tiges
@@ -13656,7 +13608,6 @@ ungot
 ungum
 unhat
 unhip
-unica
 unify
 union
 unios
@@ -13784,7 +13735,6 @@ usure
 usurp
 usury
 uteri
-utero
 utile
 utter
 uveal
@@ -13871,7 +13821,6 @@ veery
 vegan
 vegas
 veges
-veggo
 vegie
 vegos
 vehme
@@ -14367,7 +14316,6 @@ winge
 wings
 wingy
 winks
-winky
 winna
 winns
 winos
@@ -14401,7 +14349,6 @@ wiver
 wives
 wizen
 wizes
-wizzo
 woads
 woady
 woald
@@ -14409,7 +14356,6 @@ wocks
 wodge
 wodgy
 woful
-wojus
 woken
 woker
 wokka
@@ -14777,11 +14723,9 @@ zexes
 zezes
 zhomo
 zhush
-zhuzh
 zibet
 ziffs
 zigan
-zikrs
 zilas
 zilch
 zilla

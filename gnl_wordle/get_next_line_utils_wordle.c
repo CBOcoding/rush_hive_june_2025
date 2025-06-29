@@ -1,5 +1,7 @@
-#include "wordle.h"
 #include "get_next_line_wordle.h"
+#include "wordle.h"
+
+static char	*ft_prepare_str1(char *str1, t_wordle *wordle);
 
 size_t	ft_strlen_gnl(char *s)
 {
@@ -11,18 +13,6 @@ size_t	ft_strlen_gnl(char *s)
 	while (s[i] != '\0')
 		i++;
 	return (i);
-}
-
-static char	*ft_prepare_str1(char *str1, t_wordle *wordle)
-{
-	if (!str1)
-	{
-		str1 = (char *)arena_alloc(wordle->arena, sizeof(char) * 1);
-		if (str1 == NULL)
-			return (NULL);
-		str1[0] = '\0';
-	}
-	return (str1);
 }
 
 char	*ft_strjoin_gnl(char *str1, char *buffer, t_wordle *wordle)
@@ -65,4 +55,16 @@ char	*ft_strchr_gnl(char *string, int c)
 		i++;
 	}
 	return (0);
+}
+
+static char	*ft_prepare_str1(char *str1, t_wordle *wordle)
+{
+	if (!str1)
+	{
+		str1 = (char *)arena_alloc(wordle->arena, sizeof(char) * 1);
+		if (str1 == NULL)
+			return (NULL);
+		str1[0] = '\0';
+	}
+	return (str1);
 }

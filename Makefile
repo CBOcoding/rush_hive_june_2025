@@ -1,24 +1,24 @@
-NAME    = wordle
+NAME	=	wordle
 
-CC      = cc
+CC		=	cc
 
-CFLAGS  = -Wall -Wextra
-LFLAGS  = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
-HEADERS = -I.
+CFLAGS	=	-Wall -Wextra
+LFLAGS	=	-lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+HEADERS	=	-I.
 
-SRCS    =   main.c \
-            arena_simple_exit.c \
-            arena_utils_01.c \
-            importing_list.c \
-            ./gnl_wordle/get_next_line_wordle.c \
-            ./gnl_wordle/get_next_line_utils_wordle.c \
-            utils_functions_01.c \
-            ui_main.c \
-            ui_process_input.c \
-            ui_style.c \
-			assistant_logic.c
+SRCS	=	./gnl_wordle/get_next_line_utils_wordle.c \
+			./gnl_wordle/get_next_line_wordle.c \
+			assistant_logic.c \
+			arena_simple_exit.c \
+			arena_utils_01.c \
+			importing_list.c \
+			main.c \
+			ui_main.c \
+			ui_process_input.c \
+			ui_style.c \
+			utils_functions_01.c \
 
-OBJS    = $(SRCS:%.c=%.o)
+OBJS	=	$(SRCS:%.c=%.o)
 
 all: $(NAME)
 

@@ -1,11 +1,12 @@
 #include "user_interface.h"
 #include "wordle.h"
 
-void	temporary_function(Input *letter, t_wordle *wordle)
+static int	has_duplicate_letters(char *word);
+static void	reset_colors_partial(BoxColors *box_colors, Input *letter);
+static void	reset_colors_all(BoxColors *box_colors, Input *letter);
+
+void	process_wordle_feedback(Input *letter, t_wordle *wordle, BoxColors *box_colors)
 {
-	for (int j = 0; j < 5; j++)
-		printf("DEBUG %c , %d\n", letter[j].c, letter[j].flag);
-	
 	int	x;
 	int	y;
 	int	z;
@@ -37,6 +38,7 @@ void	temporary_function(Input *letter, t_wordle *wordle)
 		next_letter1:
 		z++;
 	}
+
 	z = 0;
 	while (z < 5)
 	{
@@ -94,8 +96,8 @@ void	temporary_function(Input *letter, t_wordle *wordle)
 	z = 0;
 	if (wordle->data.input_guesses_counter == 1)
 	{
-		wordle->data.words_in_matrix_1 = arena_alloc(wordle->arena, (wordle->data.len_matrix + 1) * sizeof(char *));
 		len_matrix(wordle->data.words_in_matrix_0, wordle);
+		wordle->data.words_in_matrix_1 = arena_alloc(wordle->arena, (wordle->data.len_matrix + 1) * sizeof(char *));
 		while (wordle->data.words_in_matrix_0[x])
 		{
 			y = 0;
@@ -119,11 +121,11 @@ void	temporary_function(Input *letter, t_wordle *wordle)
 			next_word1:
 			x++;
 		}
+		len_matrix(wordle->data.words_in_matrix_1, wordle);
 	}
 	else if (wordle->data.input_guesses_counter == 2)
 		{
 		wordle->data.words_in_matrix_2 = arena_alloc(wordle->arena, (wordle->data.len_matrix + 1) * sizeof(char *));
-		len_matrix(wordle->data.words_in_matrix_1, wordle);
 		while (wordle->data.words_in_matrix_1[x])
 		{
 			y = 0;
@@ -147,11 +149,11 @@ void	temporary_function(Input *letter, t_wordle *wordle)
 			next_word2:
 			x++;
 		}
+		len_matrix(wordle->data.words_in_matrix_2, wordle);
 	}
 	else if (wordle->data.input_guesses_counter == 3)
 		{
 		wordle->data.words_in_matrix_3 = arena_alloc(wordle->arena, (wordle->data.len_matrix + 1) * sizeof(char *));
-		len_matrix(wordle->data.words_in_matrix_2, wordle);
 		while (wordle->data.words_in_matrix_2[x])
 		{
 			y = 0;
@@ -175,11 +177,11 @@ void	temporary_function(Input *letter, t_wordle *wordle)
 			next_word3:
 			x++;
 		}
+		len_matrix(wordle->data.words_in_matrix_3, wordle);
 	}
 	else if (wordle->data.input_guesses_counter == 4)
 		{
 		wordle->data.words_in_matrix_4 = arena_alloc(wordle->arena, (wordle->data.len_matrix + 1) * sizeof(char *));
-		len_matrix(wordle->data.words_in_matrix_3, wordle);
 		while (wordle->data.words_in_matrix_3[x])
 		{
 			y = 0;
@@ -203,11 +205,11 @@ void	temporary_function(Input *letter, t_wordle *wordle)
 			next_word4:
 			x++;
 		}
+		len_matrix(wordle->data.words_in_matrix_4, wordle);
 	}
 	else if (wordle->data.input_guesses_counter == 5)
 		{
 		wordle->data.words_in_matrix_5 = arena_alloc(wordle->arena, (wordle->data.len_matrix + 1) * sizeof(char *));
-		len_matrix(wordle->data.words_in_matrix_4, wordle);
 		while (wordle->data.words_in_matrix_4[x])
 		{
 			y = 0;
@@ -231,11 +233,11 @@ void	temporary_function(Input *letter, t_wordle *wordle)
 			next_word5:
 			x++;
 		}
+		len_matrix(wordle->data.words_in_matrix_5, wordle);
 	}
 	else if (wordle->data.input_guesses_counter == 6)
 		{
 		wordle->data.words_in_matrix_6 = arena_alloc(wordle->arena, (wordle->data.len_matrix + 1) * sizeof(char *));
-		len_matrix(wordle->data.words_in_matrix_5, wordle);
 		while (wordle->data.words_in_matrix_5[x])
 		{
 			y = 0;
@@ -259,23 +261,17 @@ void	temporary_function(Input *letter, t_wordle *wordle)
 			next_word6:
 			x++;
 		}
+		len_matrix(wordle->data.words_in_matrix_6, wordle);
 	}
-}
-
-static int	has_duplicate_letters(const char *word)
-{
-	int	index;
-	int seen[26] = {0};
-	for (int i = 0; word[i]; i++) 
+	else
 	{
-		index = tolower(word[i]) - 'a';
-		if (index < 0 || index >= 26)
-			continue;
-		if (seen[index])
-			return 1;  // found duplicate
-		seen[index] = 1;
+		wordle->data.words_in_matrix_6[0] = "GAME OVER! PRESS RESET";
+		wordle->data.len_matrix = 1;
+		return ;
 	}
-	return 0;  // all letters are unique
+	
+	reset_colors_partial(box_colors, letter);
+	wordle->data.adviced_word = adviced_word(wordle);
 }
 
 char	*adviced_word(t_wordle *wordle)
@@ -284,95 +280,132 @@ char	*adviced_word(t_wordle *wordle)
 	int	index;
 
 	if (wordle->data.input_guesses_counter == 0)
+	{
+		attempt = wordle->data.len_matrix;
+		while (attempt--)
 		{
-			attempt = 100;
-			while (attempt--)
-			{
-				index = rand() % wordle->data.len_matrix;
-				if (!has_duplicate_letters(wordle->data.words_in_matrix_0[index]))
-					{
-			// printf("DEBUG Counter %d, Adviced word: %s\n", wordle->data.input_guesses_counter, wordle->data.words_in_matrix_0[index]);
-					return (wordle->data.words_in_matrix_0[index]);
-					}
-			}
+			index = rand() % wordle->data.len_matrix;
+			if (!has_duplicate_letters(wordle->data.words_in_matrix_0[index]))
+				return (wordle->data.words_in_matrix_0[index]);
 		}
+		return wordle->data.words_in_matrix_0[index];
+	}
 	else if (wordle->data.input_guesses_counter == 1)
+	{
+		attempt = wordle->data.len_matrix;
+		while (attempt--)
 		{
-			attempt = 100;
-			while (attempt--)
-			{
-				index = rand() % wordle->data.len_matrix;
-				if (!has_duplicate_letters(wordle->data.words_in_matrix_1[index]))
-					{
-			// printf("DEBUG Counter %d, Adviced word: %s\n", wordle->data.input_guesses_counter, wordle->data.words_in_matrix_1[index]);
-						return (wordle->data.words_in_matrix_1[index]);
-					}
-			}
+			index = rand() % wordle->data.len_matrix;
+			if (!has_duplicate_letters(wordle->data.words_in_matrix_1[index]))
+				return (wordle->data.words_in_matrix_1[index]);
 		}
+		return wordle->data.words_in_matrix_1[index];
+	}
 	else if (wordle->data.input_guesses_counter == 2)
+	{
+		attempt = wordle->data.len_matrix;
+		while (attempt--)
 		{
-			attempt = 100;
-			while (attempt--)
-			{
-				index = rand() % wordle->data.len_matrix;
-				if (!has_duplicate_letters(wordle->data.words_in_matrix_2[index]))
-				{
-			// printf("DEBUG Counter %d, Adviced word: %s\n", wordle->data.input_guesses_counter, wordle->data.words_in_matrix_2[index]);
-					return (wordle->data.words_in_matrix_2[index]);
-				}
-			}
+			index = rand() % wordle->data.len_matrix;
+			if (!has_duplicate_letters(wordle->data.words_in_matrix_2[index]))
+				return (wordle->data.words_in_matrix_2[index]);
 		}
+		return wordle->data.words_in_matrix_2[index];
+	}
 	else if (wordle->data.input_guesses_counter == 3)
+	{
+		attempt = wordle->data.len_matrix;
+		while (attempt--)
 		{
-			attempt = 100;
-			while (attempt--)
-			{
-				index = rand() % wordle->data.len_matrix;
-				if (!has_duplicate_letters(wordle->data.words_in_matrix_3[index]))
-				{
-			// printf("DEBUG Counter %d, Adviced word: %s\n", wordle->data.input_guesses_counter, wordle->data.words_in_matrix_3[index]);
-					return (wordle->data.words_in_matrix_3[index]);
-				}
-			}
+			index = rand() % wordle->data.len_matrix;
+			if (!has_duplicate_letters(wordle->data.words_in_matrix_3[index]))
+				return (wordle->data.words_in_matrix_3[index]);
 		}
+		return wordle->data.words_in_matrix_3[index];
+	}
 	else if (wordle->data.input_guesses_counter == 4)
+	{
+		attempt = wordle->data.len_matrix;
+		while (attempt--)
 		{
-			attempt = 100;
-			while (attempt--)
-			{
-				index = rand() % wordle->data.len_matrix;
-				if (!has_duplicate_letters(wordle->data.words_in_matrix_4[index]))
-				{
-			// printf("DEBUG Counter %d, Adviced word: %s\n", wordle->data.input_guesses_counter, wordle->data.words_in_matrix_4[index]);
-					return (wordle->data.words_in_matrix_4[index]);
-				}
-			}
-		}	
+			index = rand() % wordle->data.len_matrix;
+			if (!has_duplicate_letters(wordle->data.words_in_matrix_4[index]))
+				return (wordle->data.words_in_matrix_4[index]);
+		}
+		return wordle->data.words_in_matrix_4[index];
+	}	
 	else if (wordle->data.input_guesses_counter == 5)
+	{
+		attempt = wordle->data.len_matrix;
+		while (attempt--)
 		{
-			attempt = 100;
-			while (attempt--)
-			{
-				index = rand() % wordle->data.len_matrix;
-				if (!has_duplicate_letters(wordle->data.words_in_matrix_5[index]))
-					{
-			// printf("DEBUG Counter %d, Adviced word: %s\n", wordle->data.input_guesses_counter, wordle->data.words_in_matrix_5[index]);
-						return (wordle->data.words_in_matrix_5[index]);
-					}
-			}
+			index = rand() % wordle->data.len_matrix;
+			if (!has_duplicate_letters(wordle->data.words_in_matrix_5[index]))
+				return (wordle->data.words_in_matrix_5[index]);
 		}
+		return wordle->data.words_in_matrix_5[index];
+	}
 	else if (wordle->data.input_guesses_counter == 6)
+	{
+		attempt = wordle->data.len_matrix;
+		while (attempt--)
 		{
-			attempt = 100;
-			while (attempt--)
-			{
-				index = rand() % wordle->data.len_matrix;
-				if (!has_duplicate_letters(wordle->data.words_in_matrix_6[index]))
-				{
-			// printf("DEBUG Counter %d, Adviced word: %s\n", wordle->data.input_guesses_counter, wordle->data.words_in_matrix_6[index]);
-					return (wordle->data.words_in_matrix_6[index]);
-				}
-			}
+			index = rand() % wordle->data.len_matrix;
+			if (!has_duplicate_letters(wordle->data.words_in_matrix_6[index]))
+				return (wordle->data.words_in_matrix_6[index]);
 		}
-	return (0);
+		return wordle->data.words_in_matrix_6[index];
+	}
+	return NULL;
+}
+
+static int	has_duplicate_letters(char *word)
+{
+	int	index;
+	int seen[26] = {0};
+	for (int i = 0; i < 5; i++) 
+	{
+		index = tolower(word[i]) - 'a';
+		if (index < 0 || index >= 26)
+			continue;
+		if (seen[index])
+			return 1;
+		seen[index] = 1;
+	}
+	return 0;
+}
+
+void	reset_state(t_wordle *wordle, BoxColors *box_colors, Input *letter)
+{
+	wordle->data.input_guesses_counter = 0;
+	len_matrix(wordle->data.words_in_matrix_0, wordle);
+	wordle->data.forbidden_letters[26] = 0;
+	wordle->data.green_lettes[5] = 0;
+	wordle->data.yellow_letters[26] = 0;
+	wordle->data.j = 0;
+	wordle->data.adviced_word = adviced_word(wordle);
+	reset_colors_all(box_colors, letter);
+}
+
+static void	reset_colors_partial(BoxColors *box_colors, Input *letter)
+{
+	for (int i = 0; i < 5; i++)
+	{
+		if (box_colors[i].pos != 2)
+		{
+			box_colors[i].color = LIGHTGRAY;
+			box_colors[i].pos = 0;
+			letter[i].flag = 0;
+		}
+	}
+}
+
+static void	reset_colors_all(BoxColors *box_colors, Input *letter)
+{
+	for (int i = 0; i < 5; i++)
+	{
+		box_colors[i].color = LIGHTGRAY;
+		box_colors[i].pos = 0;
+		letter[i].flag = 0;
+	}
 }

@@ -2,7 +2,7 @@
 #include "user_interface.h"
 #include "wordle.h"
 
-int ui_main(t_wordle *wordle)
+void	ui_main(t_wordle *wordle)
 {
 	SetTraceLogLevel(LOG_NONE);
 
@@ -26,17 +26,23 @@ int ui_main(t_wordle *wordle)
 	Rectangle view = {0};
 
 	int line_count = wordle->data.len_matrix;
+	wordle->data.adviced_word = adviced_word(wordle);
 
 	while (!WindowShouldClose())
 	{
 		BeginDrawing();
 		ClearBackground(WHITE);
 
-		// Draws the button
+		// Draws the submit button
 		ui_style_button();
 		if (GuiButton((Rectangle){B0_X, B0_Y, B0_W, B0_H}, "Submit"))
-			temporary_function(letter, wordle);
+			process_wordle_feedback(letter, wordle, box_colors);
 
+		// Draws the reset button
+		ui_style_button();
+		if (GuiButton((Rectangle){B1_X, B1_Y, B1_W, B1_H}, "Reset"))
+			reset_state(wordle, box_colors, letter);
+		
 		// Draws the textbox
 		ui_style_textbox();
 		if (GuiTextBox((Rectangle){T0_X, T0_Y, T0_W, T0_H}, input_word, 6, edit_mode))
@@ -50,13 +56,6 @@ int ui_main(t_wordle *wordle)
 		ui_style_panel();
 		GuiScrollPanel((Rectangle){P0_X, P0_Y, P0_W, P0_H}, "WORD SUGGESTIONS",
 			(Rectangle){C0_X, C0_Y, C0_W, (line_count * 30) + 10}, &scroll, &view);
-
-		// Draws the ADVICED WORD panel ??????
-		// ui_style_button();
-		// if (GuiButton((Rectangle){B0_X, B0_Y, B0_W, B0_H}, wordle->data.adviced_word))
-		// adviced_word(wordle); //at the end of assistant logic BUT goes in SEG FAULT!!!!!
-
-
 
 		// Positions the dictionary withtin the boundaries of the scrollable panel
 		BeginScissorMode(view.x, view.y, view.width, view.height);
@@ -82,21 +81,26 @@ int ui_main(t_wordle *wordle)
 			else if (wordle->data.input_guesses_counter == 6)
 				DrawTextEx(custom_font, wordle->data.words_in_matrix_6[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
 				30, 5, BLACK);
+			else
+				DrawTextEx(custom_font, wordle->data.words_in_matrix_6[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
+				30, 5, BLACK);
 		EndScissorMode();
 
-		if (CheckCollisionPointRec(GetMousePosition(), (Rectangle){P0_X, P0_Y, P0_W, P0_H}))
-		{
-			float wheel_move = GetMouseWheelMove();
-			scroll.y += wheel_move * SCROLL_SPEED;
-		}
-
-		ui_detect_color_flags(letter, box_colors, default_colors);
+		// Separates word to individual boxes for letters
 		ui_separate_letters(input_word, letter, box_colors);
+
+		// Draws the box for the suggested word together with the word itself
+		ui_style_suggestion();
+		DrawRectangle(S0_X, S0_Y, S0_W, S0_H, LIGHTGRAY);
+		GuiDrawText(wordle->data.adviced_word, (Rectangle){S0_X, S0_Y, S0_W, S0_H}, TEXT_ALIGN_CENTER, BLACK);
+
+		// Detects user input (mouse)
+		ui_detect_scroll(&scroll);
+		ui_detect_color_flags(letter, box_colors, default_colors);
 
 		EndDrawing();
 	}
 
 	UnloadFont(custom_font);
 	CloseWindow();
-	return 0;
 }
