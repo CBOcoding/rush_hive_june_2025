@@ -3,9 +3,6 @@
 
 void	process_wordle_feedback(Input *letter, t_wordle *wordle)
 {
-	for (int j = 0; j < 5; j++)
-		printf("DEBUG %c , %d\n", letter[j].c, letter[j].flag);
-	
 	int	x;
 	int	y;
 	int	z;
@@ -37,6 +34,7 @@ void	process_wordle_feedback(Input *letter, t_wordle *wordle)
 		next_letter1:
 		z++;
 	}
+
 	z = 0;
 	while (z < 5)
 	{
@@ -92,10 +90,10 @@ void	process_wordle_feedback(Input *letter, t_wordle *wordle)
 	}
 
 	z = 0;
+	len_matrix(wordle->data.words_in_matrix_0, wordle);
 	if (wordle->data.input_guesses_counter == 1)
 	{
 		wordle->data.words_in_matrix_1 = arena_alloc(wordle->arena, (wordle->data.len_matrix + 1) * sizeof(char *));
-		len_matrix(wordle->data.words_in_matrix_0, wordle);
 		while (wordle->data.words_in_matrix_0[x])
 		{
 			y = 0;
@@ -119,11 +117,11 @@ void	process_wordle_feedback(Input *letter, t_wordle *wordle)
 			next_word1:
 			x++;
 		}
+		len_matrix(wordle->data.words_in_matrix_1, wordle);
 	}
 	else if (wordle->data.input_guesses_counter == 2)
 		{
 		wordle->data.words_in_matrix_2 = arena_alloc(wordle->arena, (wordle->data.len_matrix + 1) * sizeof(char *));
-		len_matrix(wordle->data.words_in_matrix_1, wordle);
 		while (wordle->data.words_in_matrix_1[x])
 		{
 			y = 0;
@@ -147,11 +145,11 @@ void	process_wordle_feedback(Input *letter, t_wordle *wordle)
 			next_word2:
 			x++;
 		}
+		len_matrix(wordle->data.words_in_matrix_2, wordle);
 	}
 	else if (wordle->data.input_guesses_counter == 3)
 		{
 		wordle->data.words_in_matrix_3 = arena_alloc(wordle->arena, (wordle->data.len_matrix + 1) * sizeof(char *));
-		len_matrix(wordle->data.words_in_matrix_2, wordle);
 		while (wordle->data.words_in_matrix_2[x])
 		{
 			y = 0;
@@ -175,11 +173,11 @@ void	process_wordle_feedback(Input *letter, t_wordle *wordle)
 			next_word3:
 			x++;
 		}
+		len_matrix(wordle->data.words_in_matrix_3, wordle);
 	}
 	else if (wordle->data.input_guesses_counter == 4)
 		{
 		wordle->data.words_in_matrix_4 = arena_alloc(wordle->arena, (wordle->data.len_matrix + 1) * sizeof(char *));
-		len_matrix(wordle->data.words_in_matrix_3, wordle);
 		while (wordle->data.words_in_matrix_3[x])
 		{
 			y = 0;
@@ -203,11 +201,11 @@ void	process_wordle_feedback(Input *letter, t_wordle *wordle)
 			next_word4:
 			x++;
 		}
+		len_matrix(wordle->data.words_in_matrix_4, wordle);
 	}
 	else if (wordle->data.input_guesses_counter == 5)
 		{
 		wordle->data.words_in_matrix_5 = arena_alloc(wordle->arena, (wordle->data.len_matrix + 1) * sizeof(char *));
-		len_matrix(wordle->data.words_in_matrix_4, wordle);
 		while (wordle->data.words_in_matrix_4[x])
 		{
 			y = 0;
@@ -231,11 +229,11 @@ void	process_wordle_feedback(Input *letter, t_wordle *wordle)
 			next_word5:
 			x++;
 		}
+		len_matrix(wordle->data.words_in_matrix_5, wordle);
 	}
 	else if (wordle->data.input_guesses_counter == 6)
 		{
 		wordle->data.words_in_matrix_6 = arena_alloc(wordle->arena, (wordle->data.len_matrix + 1) * sizeof(char *));
-		len_matrix(wordle->data.words_in_matrix_5, wordle);
 		while (wordle->data.words_in_matrix_5[x])
 		{
 			y = 0;
@@ -259,23 +257,25 @@ void	process_wordle_feedback(Input *letter, t_wordle *wordle)
 			next_word6:
 			x++;
 		}
+		len_matrix(wordle->data.words_in_matrix_6, wordle);
 	}
+	wordle->data.adviced_word = adviced_word(wordle);
 }
 
-static int	has_duplicate_letters(const char *word)
+static int	has_duplicate_letters(char *word)
 {
 	int	index;
 	int seen[26] = {0};
-	for (int i = 0; word[i]; i++) 
+	for (int i = 0; i < 5; i++) 
 	{
 		index = tolower(word[i]) - 'a';
 		if (index < 0 || index >= 26)
 			continue;
 		if (seen[index])
-			return 1;  // found duplicate
+			return 1;
 		seen[index] = 1;
 	}
-	return 0;  // all letters are unique
+	return 0;
 }
 
 char	*adviced_word(t_wordle *wordle)
@@ -283,96 +283,72 @@ char	*adviced_word(t_wordle *wordle)
 	int	attempt;
 	int	index;
 
-	if (wordle->data.input_guesses_counter == 0)
+	printf("%d\n", wordle->data.len_matrix); // debugging here
+	if (wordle->data.input_guesses_counter == 1)
+	{
+		attempt = wordle->data.len_matrix;
+		while (attempt--)
 		{
-			attempt = 100;
-			while (attempt--)
-			{
-				index = rand() % wordle->data.len_matrix;
-				if (!has_duplicate_letters(wordle->data.words_in_matrix_0[index]))
-					{
-			// printf("DEBUG Counter %d, Adviced word: %s\n", wordle->data.input_guesses_counter, wordle->data.words_in_matrix_0[index]);
-					return (wordle->data.words_in_matrix_0[index]);
-					}
-			}
+			index = rand() % wordle->data.len_matrix;
+			if (!has_duplicate_letters(wordle->data.words_in_matrix_1[index]))
+				return (wordle->data.words_in_matrix_1[index]);
 		}
-	else if (wordle->data.input_guesses_counter == 1)
-		{
-			attempt = 100;
-			while (attempt--)
-			{
-				index = rand() % wordle->data.len_matrix;
-				if (!has_duplicate_letters(wordle->data.words_in_matrix_1[index]))
-					{
-			// printf("DEBUG Counter %d, Adviced word: %s\n", wordle->data.input_guesses_counter, wordle->data.words_in_matrix_1[index]);
-						return (wordle->data.words_in_matrix_1[index]);
-					}
-			}
-		}
+		return wordle->data.words_in_matrix_1[index];
+	}
 	else if (wordle->data.input_guesses_counter == 2)
+	{
+		attempt = wordle->data.len_matrix;
+		while (attempt--)
 		{
-			attempt = 100;
-			while (attempt--)
-			{
-				index = rand() % wordle->data.len_matrix;
-				if (!has_duplicate_letters(wordle->data.words_in_matrix_2[index]))
-				{
-			// printf("DEBUG Counter %d, Adviced word: %s\n", wordle->data.input_guesses_counter, wordle->data.words_in_matrix_2[index]);
-					return (wordle->data.words_in_matrix_2[index]);
-				}
-			}
+			index = rand() % wordle->data.len_matrix;
+			if (!has_duplicate_letters(wordle->data.words_in_matrix_2[index]))
+				return (wordle->data.words_in_matrix_2[index]);
 		}
+		return wordle->data.words_in_matrix_2[index];
+	}
 	else if (wordle->data.input_guesses_counter == 3)
+	{
+		attempt = wordle->data.len_matrix;
+		while (attempt--)
 		{
-			attempt = 100;
-			while (attempt--)
-			{
-				index = rand() % wordle->data.len_matrix;
-				if (!has_duplicate_letters(wordle->data.words_in_matrix_3[index]))
-				{
-			// printf("DEBUG Counter %d, Adviced word: %s\n", wordle->data.input_guesses_counter, wordle->data.words_in_matrix_3[index]);
-					return (wordle->data.words_in_matrix_3[index]);
-				}
-			}
+			index = rand() % wordle->data.len_matrix;
+			if (!has_duplicate_letters(wordle->data.words_in_matrix_3[index]))
+				return (wordle->data.words_in_matrix_3[index]);
 		}
+		return wordle->data.words_in_matrix_3[index];
+	}
 	else if (wordle->data.input_guesses_counter == 4)
+	{
+		attempt = wordle->data.len_matrix;
+		while (attempt--)
 		{
-			attempt = 100;
-			while (attempt--)
-			{
-				index = rand() % wordle->data.len_matrix;
-				if (!has_duplicate_letters(wordle->data.words_in_matrix_4[index]))
-				{
-			// printf("DEBUG Counter %d, Adviced word: %s\n", wordle->data.input_guesses_counter, wordle->data.words_in_matrix_4[index]);
-					return (wordle->data.words_in_matrix_4[index]);
-				}
-			}
-		}	
+			index = rand() % wordle->data.len_matrix;
+			if (!has_duplicate_letters(wordle->data.words_in_matrix_4[index]))
+				return (wordle->data.words_in_matrix_4[index]);
+		}
+		return wordle->data.words_in_matrix_4[index];
+	}	
 	else if (wordle->data.input_guesses_counter == 5)
+	{
+		attempt = wordle->data.len_matrix;
+		while (attempt--)
 		{
-			attempt = 100;
-			while (attempt--)
-			{
-				index = rand() % wordle->data.len_matrix;
-				if (!has_duplicate_letters(wordle->data.words_in_matrix_5[index]))
-					{
-			// printf("DEBUG Counter %d, Adviced word: %s\n", wordle->data.input_guesses_counter, wordle->data.words_in_matrix_5[index]);
-						return (wordle->data.words_in_matrix_5[index]);
-					}
-			}
+			index = rand() % wordle->data.len_matrix;
+			if (!has_duplicate_letters(wordle->data.words_in_matrix_5[index]))
+				return (wordle->data.words_in_matrix_5[index]);
 		}
+		return wordle->data.words_in_matrix_5[index];
+	}
 	else if (wordle->data.input_guesses_counter == 6)
+	{
+		attempt = wordle->data.len_matrix;
+		while (attempt--)
 		{
-			attempt = 100;
-			while (attempt--)
-			{
-				index = rand() % wordle->data.len_matrix;
-				if (!has_duplicate_letters(wordle->data.words_in_matrix_6[index]))
-				{
-			// printf("DEBUG Counter %d, Adviced word: %s\n", wordle->data.input_guesses_counter, wordle->data.words_in_matrix_6[index]);
-					return (wordle->data.words_in_matrix_6[index]);
-				}
-			}
+			index = rand() % wordle->data.len_matrix;
+			if (!has_duplicate_letters(wordle->data.words_in_matrix_6[index]))
+				return (wordle->data.words_in_matrix_6[index]);
 		}
+		return wordle->data.words_in_matrix_6[index];
+	}
 	return (0);
 }

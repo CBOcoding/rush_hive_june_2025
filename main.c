@@ -11,6 +11,7 @@ int	main(int argc, char **argv)
 	
 	(void)argv;
 
+	srand(time(NULL));
 	argc_check(argc);
 	check_file_name(argv[1]);
 	wordle.arena = arena_create(ARENA_SIZE);

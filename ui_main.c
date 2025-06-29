@@ -51,13 +51,6 @@ void	ui_main(t_wordle *wordle)
 		GuiScrollPanel((Rectangle){P0_X, P0_Y, P0_W, P0_H}, "WORD SUGGESTIONS",
 			(Rectangle){C0_X, C0_Y, C0_W, (line_count * 30) + 10}, &scroll, &view);
 
-		// Draws the ADVICED WORD panel ??????
-		// ui_style_button();
-		// if (GuiButton((Rectangle){B0_X, B0_Y, B0_W, B0_H}, wordle->data.adviced_word))
-		// adviced_word(wordle); //at the end of assistant logic BUT goes in SEG FAULT!!!!!
-
-
-
 		// Positions the dictionary withtin the boundaries of the scrollable panel
 		BeginScissorMode(view.x, view.y, view.width, view.height);
 		for (int i = 0; i < wordle->data.len_matrix; i++)
@@ -84,9 +77,17 @@ void	ui_main(t_wordle *wordle)
 				30, 5, BLACK);
 		EndScissorMode();
 
+		// Separates word to individual boxes for letters
+		ui_separate_letters(input_word, letter, box_colors);
+
+		// Draws the box for the suggested word together with the word itself
+		ui_style_suggestion();
+		DrawRectangle(S0_X, S0_Y, S0_W, S0_H, LIGHTGRAY);
+		GuiDrawText(wordle->data.adviced_word, (Rectangle){S0_X, S0_Y, S0_W, S0_H}, TEXT_ALIGN_CENTER, BLACK);
+
+		// Detects user input (mouse)
 		ui_detect_scroll(&scroll);
 		ui_detect_color_flags(letter, box_colors, default_colors);
-		ui_separate_letters(input_word, letter, box_colors);
 
 		EndDrawing();
 	}

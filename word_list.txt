@@ -36,8 +36,6 @@ abhor
 abide
 abies
 abius
-abjad
-abjud
 abled
 abler
 ables
@@ -2865,7 +2863,6 @@ dairy
 daisy
 daker
 daled
-dalek
 dales
 dalis
 dalle
@@ -4511,7 +4508,6 @@ fungi
 fungo
 fungs
 funic
-funis
 funks
 funky
 funny
@@ -6639,7 +6635,6 @@ lahal
 lahar
 laich
 laics
-laide
 laids
 laigh
 laika
@@ -8942,7 +8937,6 @@ outed
 outen
 outer
 outgo
-outie
 outre
 outro
 outta
@@ -9171,7 +9165,6 @@ patas
 patch
 pated
 patee
-patel
 paten
 pater
 pates
@@ -10912,7 +10905,6 @@ rowel
 rowen
 rower
 rowet
-rowie
 rowme
 rownd
 rowns
@@ -11254,7 +11246,6 @@ schmo
 schul
 schwa
 scifi
-scind
 scion
 scire
 sclim
@@ -14367,7 +14358,6 @@ winge
 wings
 wingy
 winks
-winky
 winna
 winns
 winos

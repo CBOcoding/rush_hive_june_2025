@@ -22,7 +22,7 @@
 
 # define SCROLL_SPEED 40.0f
 
-# define B0_X (((SCREEN_WIDTH - UI_WIDTH) / 2) + (UI_WIDTH - B0_W) / 12)
+# define B0_X (SCREEN_WIDTH - UI_WIDTH) + 620
 # define B0_Y (((SCREEN_HEIGHT - UI_HEIGHT) / 2) + (UI_HEIGHT - B0_H) - 50)
 # define B0_W 200
 # define B0_H 80
@@ -65,6 +65,11 @@
 # define C0_X 0
 # define C0_Y 0
 # define C0_W 580
+
+# define S0_X (SCREEN_WIDTH - UI_WIDTH) + 20
+# define S0_Y (((SCREEN_HEIGHT - UI_HEIGHT) / 2) + (UI_HEIGHT - T0_H) - 50)
+# define S0_W 300
+# define S0_H 80
 
 //----------------------------------------------------------------------------------
 // Type Definitions
@@ -137,11 +142,14 @@ void	ui_style_button(void);
  */
 void	ui_style_panel(void);
 
+/** Configurates the visuals of a suggested word
+ * @return None
+ */
+void	ui_style_suggestion(void);
+
 /** Configurates the visuals of a textbox
  * @return None
  */
 void	ui_style_textbox(void);
-
-
 
 #endif
