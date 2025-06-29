@@ -26,17 +26,23 @@ void	ui_main(t_wordle *wordle)
 	Rectangle view = {0};
 
 	int line_count = wordle->data.len_matrix;
+	wordle->data.adviced_word = adviced_word(wordle);
 
 	while (!WindowShouldClose())
 	{
 		BeginDrawing();
 		ClearBackground(WHITE);
 
-		// Draws the button
+		// Draws the submit button
 		ui_style_button();
 		if (GuiButton((Rectangle){B0_X, B0_Y, B0_W, B0_H}, "Submit"))
-			process_wordle_feedback(letter, wordle);
+			process_wordle_feedback(letter, wordle, box_colors);
 
+		// Draws the reset button
+		ui_style_button();
+		if (GuiButton((Rectangle){B1_X, B1_Y, B1_W, B1_H}, "Reset"))
+			reset_state(wordle, box_colors, letter);
+		
 		// Draws the textbox
 		ui_style_textbox();
 		if (GuiTextBox((Rectangle){T0_X, T0_Y, T0_W, T0_H}, input_word, 6, edit_mode))
@@ -73,6 +79,9 @@ void	ui_main(t_wordle *wordle)
 				DrawTextEx(custom_font, wordle->data.words_in_matrix_5[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
 				30, 5, BLACK);
 			else if (wordle->data.input_guesses_counter == 6)
+				DrawTextEx(custom_font, wordle->data.words_in_matrix_6[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
+				30, 5, BLACK);
+			else
 				DrawTextEx(custom_font, wordle->data.words_in_matrix_6[i], (Vector2){P0_X + 10 + scroll.x, P0_Y + 30 + scroll.y + i * 30},
 				30, 5, BLACK);
 		EndScissorMode();

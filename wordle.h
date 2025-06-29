@@ -26,6 +26,9 @@
 // Type Definitions
 //----------------------------------------------------------------------------------
 
+typedef struct BoxColors BoxColors;
+typedef struct Input Input;
+
 typedef struct s_data
 {
 	char	*full_list_one_line;
@@ -61,6 +64,7 @@ typedef struct s_wordle
 char	**ft_split(char const *s, char c, t_wordle *wordle);
 void	importing_list(char *argv, t_wordle *wordle);
 void	len_matrix(char **matrix, t_wordle *wordle);
+void	reset_state(t_wordle *wordle, BoxColors *box_colors, Input *letter);
 void	ui_main(t_wordle *wordle);
 
 #endif

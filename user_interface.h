@@ -22,10 +22,15 @@
 
 # define SCROLL_SPEED 40.0f
 
-# define B0_X (SCREEN_WIDTH - UI_WIDTH) + 620
+# define B0_X (SCREEN_WIDTH - UI_WIDTH) + 490
 # define B0_Y (((SCREEN_HEIGHT - UI_HEIGHT) / 2) + (UI_HEIGHT - B0_H) - 50)
 # define B0_W 200
 # define B0_H 80
+
+# define B1_X (SCREEN_WIDTH - UI_WIDTH) + 750
+# define B1_Y (((SCREEN_HEIGHT - UI_HEIGHT) / 2) + (UI_HEIGHT - B0_H) - 50)
+# define B1_W 200
+# define B1_H 80
 
 # define T0_X (SCREEN_WIDTH - UI_WIDTH) + 20
 # define T0_Y (((SCREEN_HEIGHT - UI_HEIGHT) / 2) + (UI_HEIGHT - T0_H) - 180)
@@ -106,9 +111,10 @@ char	*adviced_word(t_wordle *wordle);
 /** Processes a feedback returned from the wordle game each round
  * @param letter Struct holding each individual letter with its color flag
  * @param wordle Struct holding data for the main text processing logic
+ * @param box_colors Colors and flag values of the separated letters
  * @return None
  */
-void	process_wordle_feedback(Input *letter, t_wordle *wordle);
+void	process_wordle_feedback(Input *letter, t_wordle *wordle, BoxColors *box_colors);
 
 /** Detects a mouse-click and sets color flags accordingly
  * @param letter Struct holding each individual letter with its color flag
