@@ -40,7 +40,7 @@ typedef struct s_data
 	char	**words_in_matrix_5;
 	char	**words_in_matrix_6;
 	char	forbidden_letters[27];
-	char	green_lettes[6];
+	char	green_letters[6];
 	char	yellow_letters[27];
 	char	*adviced_word;
 	int		input_guesses_counter;

@@ -38,7 +38,6 @@ ables
 ablet
 ablow
 abmho
-abnet
 abode
 abohm
 aboil
@@ -105,7 +104,6 @@ acral
 acred
 acres
 acrid
-acron
 acros
 actas
 acted
@@ -253,7 +251,6 @@ agros
 agrum
 agued
 agues
-aguey
 aguna
 agush
 aguti
@@ -727,7 +724,6 @@ atimy
 atlas
 atman
 atmas
-atmos
 atocs
 atoke
 atoks
@@ -5866,7 +5862,6 @@ innie
 innit
 inorb
 input
-inros
 inrun
 insee
 inset
@@ -7252,7 +7247,6 @@ maiko
 maiks
 maile
 maill
-mailo
 mails
 maims
 mains
@@ -7646,7 +7640,6 @@ mifty
 miggs
 might
 migma
-migod
 mihas
 mihis
 mikan
@@ -7746,7 +7739,6 @@ mites
 mitie
 mitis
 mitre
-mitry
 mitta
 mitts
 mivey
@@ -8459,7 +8451,6 @@ nodes
 nodum
 nodus
 noels
-noema
 noeme
 nogal
 noggs
@@ -9931,7 +9922,6 @@ pryse
 psalm
 pseud
 pshaw
-pshut
 psias
 psion
 psoae
@@ -10094,7 +10084,6 @@ qajaq
 qanat
 qapik
 qibla
-qilas
 qipao
 qophs
 qorma
@@ -11517,7 +11506,6 @@ shivs
 shlep
 shlub
 shmek
-shmoe
 shoal
 shoat
 shock
@@ -13693,7 +13681,6 @@ urari
 urase
 urate
 urban
-urbex
 urbia
 urdee
 ureal
@@ -13925,7 +13912,6 @@ vireo
 vires
 virga
 virge
-virgo
 virid
 virls
 virtu

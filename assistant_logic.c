@@ -15,7 +15,7 @@ void	process_wordle_feedback(Input *letter, t_wordle *wordle, BoxColors *box_col
 
 	wordle->data.input_guesses_counter += 1;
 	wordle->data.forbidden_letters[26] = 0;
-	wordle->data.green_lettes[5] = 0;
+	wordle->data.green_letters[5] = 0;
 	wordle->data.yellow_letters[26] = 0;
 	x = 0;
 	z = 0;
@@ -27,12 +27,12 @@ void	process_wordle_feedback(Input *letter, t_wordle *wordle, BoxColors *box_col
 			char_check = 0;
 			while (char_check < wordle->data.green)
 			{
-				if (wordle->data.green_lettes[char_check] == letter[z].c)
-				goto next_letter1;
+				if (wordle->data.green_letters[char_check] == letter[z].c)
+					goto next_letter1;
 				char_check++;
 			}
-			if (letter[z].c )
-			wordle->data.green_lettes[wordle->data.green] = letter[z].c;
+			if (letter[z].c)
+				wordle->data.green_letters[wordle->data.green] = letter[z].c;
 			wordle->data.green += 1;
 		}
 		next_letter1:
@@ -48,11 +48,11 @@ void	process_wordle_feedback(Input *letter, t_wordle *wordle, BoxColors *box_col
 			while (char_check < wordle->data.yellow)
 			{
 				if (wordle->data.yellow_letters[char_check] == letter[z].c)
-				goto next_letter3;
+					goto next_letter3;
 				char_check++;
 			}
-			if (letter[z].c )
-			wordle->data.yellow_letters[wordle->data.yellow] = letter[z].c;
+			if (letter[z].c)
+				wordle->data.yellow_letters[wordle->data.yellow] = letter[z].c;
 			wordle->data.yellow += 1;
 		}
 		next_letter3:
@@ -67,26 +67,26 @@ void	process_wordle_feedback(Input *letter, t_wordle *wordle, BoxColors *box_col
 			char_check = 0;
 			while (char_check < wordle->data.green)
 			{
-				if (wordle->data.green_lettes[char_check] == letter[z].c)
-				goto next_letter2;
+				if (wordle->data.green_letters[char_check] == letter[z].c)
+					goto next_letter2;
 				char_check++;
 			}
 			char_check = 0;
 			while (char_check < wordle->data.yellow)
 			{
 				if (wordle->data.yellow_letters[char_check] == letter[z].c)
-				goto next_letter2;
+					goto next_letter2;
 				char_check++;
 			}
 			char_check = 0;
 			while (char_check < wordle->data.j)
 			{
 				if (wordle->data.forbidden_letters[char_check] == letter[z].c)
-				goto next_letter2;
+					goto next_letter2;
 				char_check++;
 			}
-			if (letter[z].c )
-			wordle->data.forbidden_letters[wordle->data.j] = letter[z].c;
+			if (letter[z].c)
+				wordle->data.forbidden_letters[wordle->data.j] = letter[z].c;
 			wordle->data.j += 1;
 		}
 		next_letter2:
@@ -269,7 +269,7 @@ void	process_wordle_feedback(Input *letter, t_wordle *wordle, BoxColors *box_col
 		wordle->data.len_matrix = 1;
 		return ;
 	}
-	
+	printf("%d   %d\n",wordle->data.input_guesses_counter, wordle->data.len_matrix);
 	reset_colors_partial(box_colors, letter);
 	wordle->data.adviced_word = adviced_word(wordle);
 }
@@ -380,9 +380,11 @@ void	reset_state(t_wordle *wordle, BoxColors *box_colors, Input *letter)
 	wordle->data.input_guesses_counter = 0;
 	len_matrix(wordle->data.words_in_matrix_0, wordle);
 	wordle->data.forbidden_letters[26] = 0;
-	wordle->data.green_lettes[5] = 0;
+	wordle->data.green_letters[5] = 0;
 	wordle->data.yellow_letters[26] = 0;
 	wordle->data.j = 0;
+	wordle->data.yellow = 0;
+	wordle->data.green = 0;
 	wordle->data.adviced_word = adviced_word(wordle);
 	reset_colors_all(box_colors, letter);
 }
