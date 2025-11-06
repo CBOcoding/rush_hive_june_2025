@@ -1,6 +1,9 @@
 ## 🧩 Wordle Rush organized by Hive Helsinki in June 2025.
 
-## ➡️➡️ <img width="32" height="32" alt="image" src="https://github.com/user-attachments/assets/c178e3e6-6247-4c67-a1b3-db6a7e64ce1e" /> [Check a 45 sec video of the developed app in action!](https://www.linkedin.com/posts/activity-7345491604654190592-DmbJ?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAqNIeEBz2Gs3zVOaQx7uL5NGKp_0LzB9OY).
+<h2>➡️➡️ <img width="32" height="32" src="https://github.com/user-attachments/assets/c178e3e6-6247-4c67-a1b3-db6a7e64ce1e" /> 
+<a href="https://www.linkedin.com/posts/activity-7345491604654190592-DmbJ?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAqNIeEBz2Gs3zVOaQx7uL5NGKp_0LzB9OY">
+Check a 45 sec video of the developed app in action!
+</a></h2>
 
 ## 📘 Overview
 
